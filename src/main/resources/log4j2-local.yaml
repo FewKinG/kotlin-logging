@@ -1,0 +1,30 @@
+Configuration:
+  thresholdFilter:
+    level: debug
+  appenders:
+    Console:
+      name: STDOUT
+      PatternLayout:
+        Pattern: "[%-5level] %c{1.} - %m%n"
+    RandomAccessFile:
+      name: LOGFILE
+      fileName: "log.json"
+      JsonLayout:
+        endOfLine: "\n"
+        eventEol: true
+        compact: true
+        includeTimeMillis: true
+        KeyValuePair:
+          - key: "environment"
+            value: "${ctx:environment}"
+          - key: "service"
+            value: "${ctx:service}"
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: STDOUT
+        - ref: LOGFILE
+
+    LoggerRef:
+
