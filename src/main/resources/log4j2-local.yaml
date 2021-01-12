@@ -9,22 +9,16 @@ Configuration:
     RandomAccessFile:
       name: LOGFILE
       fileName: "log.json"
-      JsonLayout:
-        endOfLine: "\n"
-        eventEol: true
-        compact: true
-        includeTimeMillis: true
+      EcsLayout:
+        includeMarkers: true
         KeyValuePair:
           - key: "environment"
-            value: "${ctx:environment}"
-          - key: "service"
-            value: "${ctx:service}"
+            value: "$${ctx:environment}"
+          - key: "service.name"
+            value: "$${ctx:service}"
   Loggers:
     Root:
       level: info
       AppenderRef:
         - ref: STDOUT
         - ref: LOGFILE
-
-    LoggerRef:
-

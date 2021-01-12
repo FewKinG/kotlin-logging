@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "app.haspa.alex"
-version = "1.0.0"
+version = "1.0.1"
 
 val kotlinVersion = "1.4.10"
 val log4jVersion = "2.12.1"
@@ -51,6 +51,7 @@ dependencies {
     api("org.apache.logging.log4j:log4j-core:$log4jVersion")
     api("org.apache.logging.log4j:log4j-api:$log4jVersion")
     api("org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion")
+    implementation("co.elastic.logging:log4j2-ecs-layout:1.0.0.RC1")
 }
 
 buildscript {
