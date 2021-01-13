@@ -12,10 +12,10 @@ Configuration:
       EcsLayout:
         includeMarkers: true
         KeyValuePair:
-          - key: "environment"
-            value: "$${ctx:environment}"
           - key: "service.name"
-            value: "$${ctx:service}"
+            value: "${main:service}"
+          - key: "labels.environment"
+            value: "${main:environment}"
   Loggers:
     Root:
       level: info

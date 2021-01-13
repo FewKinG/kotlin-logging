@@ -2,9 +2,11 @@ package app.haspa.alex.logging
 
 import org.apache.logging.log4j.*
 import org.apache.logging.log4j.core.config.Configurator
+import org.apache.logging.log4j.core.lookup.MainMapLookup
 import org.apache.logging.log4j.message.ObjectMessage
 
-var log: Logger = LogManager.getLogger("kotlin-logging")
+val log = Configurator.initialize(null, "log4j2-local.yaml").getLogger("kotlin-logging")
+
 object Logging : Logger by log {
 
     data class LoggingConfig(
@@ -16,8 +18,12 @@ object Logging : Logger by log {
 
     fun init(loggingConfig: LoggingConfig) {
         config = loggingConfig
-        Configurator.initialize(null, "log4j2-local.yaml")
-        log = LogManager.getLogger("kotlin-logging")
+        MainMapLookup.setMainArguments(
+            "service",
+            loggingConfig.service,
+            "environment",
+            loggingConfig.environment
+        )
     }
 
     fun info(msg: String, marker: String? = null, data: Map<String, Any>? = null) {
@@ -68,8 +74,6 @@ object Logging : Logger by log {
             e.printStackTrace()
             return null
         }
-        ThreadContext.put("service", config!!.service)
-        ThreadContext.put("environment", config!!.environment)
         return log
     }
 

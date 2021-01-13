@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "app.haspa.alex"
-version = "1.0.1"
+version = "1.0.2"
 
 val kotlinVersion = "1.4.10"
 val log4jVersion = "2.12.1"
